@@ -43,7 +43,7 @@ var render = setInterval(function() {
                      ctx.beginPath();
                      ctx.moveTo(x*tileW, y*tileH);
                      ctx.lineTo((x*tileW)+tileW, y*tileH);
-                     ctx.strokeStyle = shadeBlend(-0.5, map.tiles[x][y].color);
+                     ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);
                      ctx.stroke();
                      ctx.closePath();
                  }
@@ -52,7 +52,7 @@ var render = setInterval(function() {
                      ctx.beginPath();
                      ctx.moveTo((x*tileW)+tileW, y*tileH);
                      ctx.lineTo((x*tileW)+tileW, (y*tileH)+tileH);
-                     ctx.strokeStyle = shadeBlend(-0.5, map.tiles[x][y].color);;
+                     ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);;
                      ctx.stroke();
                      ctx.closePath();
                  }
@@ -61,7 +61,7 @@ var render = setInterval(function() {
                      ctx.beginPath();
                      ctx.moveTo(x*tileW, (y*tileH)+tileH);
                      ctx.lineTo((x*tileW)+tileW, (y*tileH)+tileH);
-                     ctx.strokeStyle = shadeBlend(-0.5, map.tiles[x][y].color);;
+                     ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);;
                      ctx.stroke();
                      ctx.closePath();
                  }
@@ -70,7 +70,7 @@ var render = setInterval(function() {
                      ctx.beginPath();
                      ctx.moveTo(x*tileW, y*tileH);
                      ctx.lineTo(x*tileW, (y*tileH)+tileH);
-                     ctx.strokeStyle = shadeBlend(-0.5, map.tiles[x][y].color);;
+                     ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);;
                      ctx.stroke();
                      ctx.closePath();
                  }

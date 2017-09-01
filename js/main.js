@@ -42,7 +42,7 @@ var render = setInterval(function() {
                 if (map.tiles[x][y].cliffs[0] == 1) {
                      ctx.beginPath();
                      ctx.moveTo(x*tileW, y*tileH);
-                     ctx.lineTo((x*tileW)+tileW, y*tileH);
+                     ctx.lineTo((x*tileW)+tileW, y*tileH-1);
                      ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);
                      ctx.stroke();
                      ctx.closePath();
@@ -51,7 +51,7 @@ var render = setInterval(function() {
                  if (map.tiles[x][y].cliffs[1] == 1) {
                      ctx.beginPath();
                      ctx.moveTo((x*tileW)+tileW, y*tileH);
-                     ctx.lineTo((x*tileW)+tileW, (y*tileH)+tileH);
+                     ctx.lineTo((x*tileW)+tileW+1, (y*tileH)+tileH);
                      ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);;
                      ctx.stroke();
                      ctx.closePath();
@@ -60,7 +60,7 @@ var render = setInterval(function() {
                  if (map.tiles[x][y].cliffs[2] == 1) {
                      ctx.beginPath();
                      ctx.moveTo(x*tileW, (y*tileH)+tileH);
-                     ctx.lineTo((x*tileW)+tileW, (y*tileH)+tileH);
+                     ctx.lineTo((x*tileW)+tileW, (y*tileH)+tileH+1);
                      ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);;
                      ctx.stroke();
                      ctx.closePath();
@@ -69,7 +69,7 @@ var render = setInterval(function() {
                  if (map.tiles[x][y].cliffs[3] == 1) {
                      ctx.beginPath();
                      ctx.moveTo(x*tileW, y*tileH);
-                     ctx.lineTo(x*tileW, (y*tileH)+tileH);
+                     ctx.lineTo(x*tileW-1, (y*tileH)+tileH);
                      ctx.strokeStyle = shadeBlend(-0.75, map.tiles[x][y].color);;
                      ctx.stroke();
                      ctx.closePath();
@@ -87,7 +87,7 @@ var render = setInterval(function() {
             
             ctx.fillStyle = "red";
             ctx.beginPath();
-            ctx.rect(ply.x*tileW, ply.y*tileH, tileW, tileH);
+            ctx.rect(ply.x*tileW+1, ply.y*tileH+1, tileW-2, tileH-2);
             ctx.fill();
             ctx.closePath();
         }

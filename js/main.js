@@ -95,4 +95,7 @@ var render = setInterval(function() {
     
     document.getElementById("biome").innerHTML = "Biome: " + map.tiles[ply.x][ply.y].biome.name;
     document.getElementById("elev").innerHTML = "Elevation: " + map.tiles[ply.x][ply.y].elev;
+    document.getElementById("wood").innerHTML = "Stone: " + ply.stone;
+    document.getElementById("stone").innerHTML = "Wood: " + ply.wood;
+    document.getElementById("metal").innerHTML = "Metal: " + ply.metal;
 }, 15);

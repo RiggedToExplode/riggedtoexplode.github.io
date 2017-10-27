@@ -5,7 +5,10 @@
 var ply = {
     x: 45,
     y: 10,
-    onBoat: false
+    onBoat: false,
+    wood: 0,
+    stone: 0,
+    metal: 0
 }
 
 

@@ -240,8 +240,9 @@ function Planet (orbiting, prevDist, prevSize, size = [40, 200], dist = [800, 16
   this.dir = rand(0, 1) - 1;
   this.speed = rand(3, 15) / this.dist;
   this.moons = [];
+  this.isMoon = isMoon;
   
-  if (!isMoon) {
+  if (!this.isMoon) {
     temp = rand(0, 5);
     for (i = 0; i < temp; i++) {
       if (i == 0) {

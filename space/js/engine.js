@@ -245,7 +245,7 @@ function Planet (orbiting, prevDist, prevSize, size = [40, 200], dist = [800, 16
   if (!this.isMoon) {
     temp = rand(0, 5);
     for (i = 0; i < temp; i++) {
-      if (i == 0) {
+      if (i == 1) {
         this.moons.push(new Planet(this, 0, this.size, [5, 20], [20, 40], true));
       } else {
         this.moons.push(new Planet(this, this.moons[i-1].dist, this.moons[i-1].size, [5, 20], [20, 40], true));

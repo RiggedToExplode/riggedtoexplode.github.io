@@ -1,0 +1,47 @@
+body {
+    background-image: url("NightVale.png");
+    background-size: cover;
+}
+
+.title {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#stuff-container {
+    margin: auto;
+    margin-top: 10px;
+    width: 60%;
+    padding: 10px;
+    background-color: #641D59;
+    box-shadow: 10px 10px 5px #3c1035;
+    -webkit-transition: box-shadow 1s;
+    -moz-transition: box-shadow 1s;
+    -o-transition: box-shadow 1s;
+    transition: box-shadow 1s;
+}
+
+#stuff-container:hover {
+    box-shadow: 18px 18px 10px #511547;
+}
+
+.stuff {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    text-align: center;
+    font-family: "Georgia", Georgia, serif;
+    color: #b3b3b3;
+}
+
+#searchbar {
+    width: 83%;
+}
+
+#search-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33%;
+}

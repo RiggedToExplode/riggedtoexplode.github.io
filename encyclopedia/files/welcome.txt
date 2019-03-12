@@ -1,0 +1,6 @@
+Welcome!--:--Welcome to the Encyclopedia of Night Vale, a repository of all (well, all of what is legal)
+knowledge concerning the little desert town of Night Vale.
+<br>---<br>
+Just type in what you want to know about, and hit 'Search'. After a quick browsing of the database,
+the site should come back with you information (if it is legal to know)!
+<br><br><small>Powered by Desert Bluffs</small>

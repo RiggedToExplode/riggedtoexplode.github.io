@@ -284,6 +284,7 @@ function buy() {
     owned_mod = mod;
     potion = potion + quant;
     mod = 0;
+    action = 0;
   }
 }
 
@@ -306,6 +307,10 @@ function magic() {
 
 function explore() {
   if (action != 1) {
+    if (action == 2) {
+      action = 0;
+    }
+    
     nilvar = rand(1, 20);
     
     if (nilvar == 1) {

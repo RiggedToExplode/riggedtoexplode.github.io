@@ -393,7 +393,11 @@ function engage() {
 }
 
 function heal() {
-  hp = hp + 10;
-  potion = potion - 1;
-  say("You drank a potion. +10 HP", 0);
+  if (potion > 0) {
+    hp = hp + 10;
+    potion = potion - 1;
+    say("You drank a potion. +10 HP", 0);
+  } else {
+    say("You don't have any potions!", 0);
+  }
 }

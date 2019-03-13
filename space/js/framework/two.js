@@ -96,7 +96,7 @@ class GameObject {
     }
   }
 
-  get hitBox() {
+  get hitbox() {
     return this._hitBox;
   }
 

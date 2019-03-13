@@ -93,7 +93,7 @@ class GameObject {
       bottom: newHitbox.bottom,
       width: newHitbox.right - newHitbox.left, //Set width and height values that we might need later indirectly
       height: newHitbox.bottom - newHitbox.top
-    }
+    };
   }
 
   get hitbox() {
@@ -458,7 +458,7 @@ class Camera {
       bottom: newBounds.bottom,
       width: newBounds.right - newBounds.left,
       height: newBounds.bottom - newBounds.top
-    }
+    };
   }
 
   get bounds() {

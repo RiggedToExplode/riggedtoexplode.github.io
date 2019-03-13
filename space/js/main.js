@@ -45,7 +45,7 @@ CameraMinimap.afterDraw = function(ctx) {
   ctx.fill();
   ctx.stroke();
   ctx.closePath();
-}
+};
 
 
 
@@ -72,13 +72,23 @@ for (let temp = rand(1, 12); temp > 0; temp--) {
 }
 
 
-
-var Player = new Ship([0, 0], 0, { left: -10, top: -15, right: 10, bottom: 15 });
+    
+//Create the player from the Character class, providing a (temporary) position and a degree of rotation
+var Player = new Character([0, 0], 0);
+//Set the player position at a random position around the star
 let temp = rand(0, 360);
 let temp2 = rand(100, 400);
 Player.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp * Math.PI / 180);
 Player.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp * Math.PI / 180);
 System.addObject(Player);
+
+//Add another random ship for testing purposes.
+var NPC = new Ship([0, 0], rand(0, 360));
+temp = rand(0, 360);
+temp2 = rand(100, 400);
+NPC.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp * Math.PI / 180);
+NPC.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp * Math.PI / 180);
+System.addObject(NPC);
 
 
 

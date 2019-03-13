@@ -1,3 +1,3 @@
 # riggedtoexplode.github.io
 
-This repository houses all of the games I've made in the past, and the ones I'm making now.
+This repository houses all of my games, projects, and other random experiments with JavaScript. It's connected to a GitHub page at [https://riggedtoexplode.github.io].

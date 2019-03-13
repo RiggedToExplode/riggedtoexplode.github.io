@@ -1,79 +1,110 @@
-var now, dt;
-var ctx = canvas.ctx;
+/*======*\
+|  MAIN  |
+\*======*/
+var colors = ["red", "green", "blue"];
 
-
-
-var System = new World();
-System.addObject(new Star([0, 0]));
-
-temp2 = rand(3, 12);
-for (var a = 1; a < temp2; a++) {
-  System.addObject(new Planet(System.objects[0], System.objects[a-1].dist, System.objects[a-1].size));
+function toAU(km) {
+  return km / 149598000;
 }
 
-temp = rand(0, 360);
-var Player = new PlayerShip([System.objects[0].pos[0] + (System.objects[0].size + rand(40, 80)) * Math.cos(temp * Math.PI / 180), System.objects[0].pos[1] + (System.objects[0].size + rand(40, 80)) * Math.sin(temp * Math.PI / 180)], rand(0, 360));
-System.addObject(Player);
+function toKM(au) {
+  return au * 149598000;
+}
+
+function squish(type, amount) {
+  switch (type) {
+    case "star":
+      return amount / 360;
+    case "dist":
+      return amount / 178131;
+    case "planet":
+      return amount / 150;
+    default:
+      return null;
+  }
+}
 
 
-var Camera1 = new Camera(canvas, System, {
-    left: 0,
-    top: 0,
-    right: canvas.width,
-    bottom: canvas.height
-}, [0, 0]);
 
-var Camera2 = new Camera(canvas, System, {
-  left: canvas.width - 400,
-  top: 0,
-  right: canvas.width,
-  bottom: 200
-}, [-2666, -1333], [0.01, 0.01], "#1e1e1e", "#1e1e1e");
-Camera2.afterDraw = function (ctx) {
+var Canvas1 = new Canvas("canvas", window.innerWidth, window.innerHeight);
+var System = new World();
+
+
+var Camera1 = new Camera(Canvas1, { left: 0, top: 0, right: Canvas1.width, bottom: Canvas1.height }, System, [0, 0]); //Create our main camera
+Camera1.background = "black";
+
+var CameraMinimap = new Camera(Canvas1, { left: Canvas1.width - 400, top: 0, right: Canvas1.width, bottom: 200 }, System, [0, 0], [0.05, 0.05]); //Create the minimap
+CameraMinimap.background = "#232323"; //Slightly lighter background as to differentiate from main camera
+CameraMinimap.stroke = "white"; //Give it a white outline
+CameraMinimap.afterDraw = function(ctx) {
+  ctx.fillStyle = "white";
+  ctx.strokeStyle = "black";
+
   ctx.beginPath();
-  ctx.fillStyle = "#fff";
-  ctx.arc(this.width/2 + this.bounds.left, this.height/2 + this.bounds.top, 1, 0, 2 * Math.PI);
+  ctx.arc(this.bounds.left + this.bounds.width / 2, this.bounds.top + this.bounds.height / 2, 2, 0, 2 * Math.PI); //Draw a visible circle in the center to denotate the player, otherwise the scale would make them almost invisible.
   ctx.fill();
+  ctx.stroke();
   ctx.closePath();
 }
 
 
-window.setInterval(function () {
-  ctx.fillStyle = "black";
-  ctx.rect(0, 0, canvas.width, canvas.height);
-  ctx.fill();
-  Camera1.changePos(Player.pos[0] - Camera1.width / 2, Player.pos[1] - Camera1.height / 2);
-  Camera1.draw();
-  Camera2.changePos(Player.pos[0] - Camera2.width / 2 / Camera2.scale[0], Player.pos[1] - Camera2.height / 2 / Camera2.scale[1]);
-  Camera2.draw();
-}, 33);
 
+
+
+//SOLAR SYSTEM RANDOM GENERATION
+System.addObject(new Star(squish("star", rand(173877, 2782040)), 25000, "yellow"));
+let prev = System.objects[0];
+
+for (let temp = rand(1, 12); temp > 0; temp--) {
+  let index = System.objects[0].addSatellite(new Planet(System.objects[0], squish("dist", rand(5800000, 588000000)) + prev.size + prev.dist, rand(0, 360), rand(100, 2000), squish("planet", rand(2400, 7000)), 5000, colors[rand(0, colors.length - 1)]));
+  System.addObject(System.objects[0].satellites[index]);
+
+  let prev2 = System.objects[0].satellites[index];
+  let prevdist = 0;
+  for (let temp2 = rand(1, 4); temp2 > 0; temp2--) {
+    let index2 = System.objects[0].satellites[index].addSatellite(new Planet(System.objects[0].satellites[index], squish("dist", rand(1500000, 4000000)) + prev2.size + prevdist, rand(0, 360), rand(1000, 20000), squish("planet", rand(300, 1000)), 500, colors[rand(0, colors.length - 1)]));
+    System.addObject(System.objects[0].satellites[index].satellites[index2]);
+    prev2 = System.objects[0].satellites[index].satellites[index2];
+    prevdist = System.objects[0].satellites[index].satellites[index2].dist;
+  }
+
+  prev = System.objects[0].satellites[index];
+}
+
+
+
+var Player = new Ship([0, 0], 0, { left: -10, top: -15, right: 10, bottom: 15 });
+let temp = rand(0, 360);
+let temp2 = rand(100, 400);
+Player.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp * Math.PI / 180);
+Player.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp * Math.PI / 180);
+System.addObject(Player);
+
+
+
+//UPDATE LOOP
 var lastUpdate = Date.now();
 window.setInterval(function() {
   now = Date.now();
-  dt = now - lastUpdate;
+  dt = now - lastUpdate; //Find the amount of time (in milliseconds) since the update loop ran last.
   lastUpdate = now;
 
-  System.objects.forEach(function(e) {
-    e.update(dt);
-  });
-
-  //console.log([ply.velocity, ply.pos])
+  System.update(dt);
 }, 0);
 
+//DRAW LOOP
+window.setInterval(function() {
+  Camera1.pos = [Player.pos[0] - Camera1.bounds.width / 2, Player.pos[1] - Camera1.bounds.height / 2]; //Move main camera to center on player.
+  CameraMinimap.pos = [Player.pos[0] - CameraMinimap.bounds.width / CameraMinimap.scale[0] / 2, Player.pos[1] - CameraMinimap.bounds.height / CameraMinimap.scale[1] / 2]; //Move minimap to center on player.
 
-window.addEventListener("resize", function () {
-  canvas.changeWidth(window.innerWidth);
-  canvas.changeHeight(window.innerHeight);
+  Camera1.draw();
+  CameraMinimap.draw(); //Call draw on the two cameras.
+}, 33);
 
-  Camera1.changeBounds(0, 0, canvas.width, canvas.height);
+//WINDOW RESIZE EVENT
+window.addEventListener("resize", function() {
+  Canvas1.width = window.innerWidth; //Change the canvas size to match the new window size.
+  Canvas1.height = window.innerHeight;
+
+  Camera1.bounds = { left: 0, top: 0, right: canvas.width, bottom: canvas.height }; //Change the camera's bounds to match the new canvas size.
 });
-
-
-var keystates = {};
-window.onkeyup = function(e) {
-  keystates[e.keyCode] = false;
-};
-window.onkeydown = function(e) {
-  keystates[e.keyCode] = true;
-};

@@ -1,21 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <h1>Welcome to the main hub for my shitty code!</h1>
-    <h3>Enjoy your stay! (CSS coming ~soon~, hopefully!)</h3>
-    <h3> </h3>
-    
-    
-    <a class="game" href="space/space.html">Space Game</a>
-    <p class="desc">My current project: a game about flying a ship around in a randomly generated solar system.</p>
-    
-    <a class="game" href="island/island.html">Island Generator</a>
-    <p class="desc">My little foray into Perlin Noise Generation. A simple, never-to-be-finished game that generates a random island for you to explore.</p>
-    
-    <a class="game" href="encyclopedia/encyclopedia.html">Nightvale Encyclopedia</a>
-    <p class="desc">An encyclopedia/search engine thing I made for the weird podcast Welcome to Nightvale. I think I was playing with retrieving text files and HTML requests and shit like that.</p>
-    
-    <a class="game" href="quest/quest.html">JSQuest</a>
-    <p class="desc">A blast to the past! The first "real" game I made and showed to other people. Probably the shittiest piece of work on here, by the way.</p>
-  </body>
+    <head>
+        <title>Projects Hub</title>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <ul class="navbar">
+            <li class="navbar-item">
+                <a class="navbar-logo" href="#top">RiggedToExplode's Hub</a>
+            </li>
+            <li class="navbar-item">
+                <a class="navbar-link" href="space/space.html">Space Game</a>
+            </li>
+            <li class="navbar-item">
+                <a class="navbar-link" href="island/island.html">Island Game</a>
+            </li>
+            <li class="navbar-item">
+                <a class="navbar-link" href="quest/quest.html">Cerijan</a>
+            </li>
+            <li class="navbar-item">
+                <a class="navbar-link" href="encyclopedia/encyclopedia.html">Nightvale Encyclopedia</a>
+            </li>
+        </ul>
+        
+        <div class="page-header">
+            <a title="To my GitHub account." href="https://github.com/RiggedToExplode">
+                <img width="150" src="imgs/profile.gif" />
+            </a>
+            <a title="To the repository for this website." href="https://github.com/RiggedToExplode/riggedtoexplode.github.io">
+                <h1>riggedtoexplode.github.io</h1>
+            </a>
+        </div>
+        
+        <h3 class="page-subheader">The main hub for all of my random coding projects.</h3>
+        
+        <div class="project-grid">
+            <div class="project">
+                <h2 class="project-title"><a href="space/space.html">Space.js (Space Game)</a></h2>
+                <div class="project-left">
+                    <a href="space/space.html"><img class="project-img" width="300" src="imgs/space.png" /></a>
+                </div>
+                <div class="project-right">
+                    <p class="project-desc">My latest project, and still being updated: A game about space! Quite original, isn't it? The idea is that you are given a randomly generated solar system to fly around in, hopefully with some enemies and other AI to interact with in the future.</p>
+                    
+                    <h4 class="project-changes-header">Latest Changes:</h4>
+                    <ul class="project-changes">
+                        <li class="project-change"><b>3/12/19</b> Restructured the code, fixed moons orbiting moons, and added another ship with no AI.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="project">
+                <h2 class="project-title"><a href="island/island.js">Wynd.js (Island Game)</a></h2>
+                <div class="project-left">
+                    <a href="island/island.html"><img class="project-img" width="300" src="imgs/islands.png" /></a>
+                </div>
+                <div class="project-right">
+                    <p class="project-desc">My foray into Perlin Noise generation. This game generates a random island cloaked in black for you to uncover and map out as you play. It regenerates the island each reload.</p>
+                </div>
+            </div>
+            
+            <div class="project">
+                <h2 class="project-title"><a href="quest/quest.js">Cerijan</a></h2>
+                <div class="project-left">
+                    <a href="quest/quest.html"><img class="project-img" width="300" src="imgs/cerijan.png" /></a>
+                </div>
+                <div class="project-right">
+                    <p class="project-desc">A blast to the past! This is the first game I made. Very lightweight and grindy, this game sports only about five different types of enemies, a rudimentary level up system, and two purchaseable items.</p>
+                    
+                    <h4 class="project-changes-header">Latest Changes:</h4>
+                    <ul class="project-changes">
+                        <li class="project-change"><b>3/12/19</b> Fixed a four year old bug where you could drink more potions than you had.</li>
+                        <li class="project-change"><b>3/13/19</b> Fixed another four year old bug where the interaction buttons would not change from the "Leave" or "Accept" options for buying something.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="project">
+            <h2 class="project-title"><a href="encyclopedia/encyclopedia.html">Welcome to Nightvale Encyclopedia</a></h2>
+            <div class="project-left">
+                <a href="encyclopedia/encyclopedia.html"><img class="project-img" width="300" src="imgs/encyclopedia.png" /></a>
+            </div>
+            <div class="project-right">
+                <p class="project-desc">An encyclopedia for the podcast Welcome to Nightvale. It was my little attempt at HTTP requests, so that I could easily add entries with only text files.</p>
+            </div>
+        </div>
+        </div>
+    </body>
 </html>

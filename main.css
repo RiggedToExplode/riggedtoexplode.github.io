@@ -63,6 +63,7 @@ body {
 .page-header a {
     text-decoration: none;
     color: #71879E;
+    word-wrap: break-word;
 }
 
 .page-header a:hover {
@@ -75,10 +76,10 @@ body {
 }
 
 .page-subheader {
-    font-family: 'Exo';
     text-align: center;
     margin-top: 0.15em;
     margin-bottom: 3em;
+    font-family: "Exo";
 }
 
 
@@ -203,6 +204,11 @@ body {
 
     .navbar-item {
         float: none;
+        font-size: 50px;
+    }
+
+    .navbar-logo {
+      font-size: 80px;
     }
 
     .navbar {
@@ -213,7 +219,20 @@ body {
       margin-top: 3em;
     }
 
+    .page-subheader {
+      font-size: 40px;
+    }
+
+    .page-header img {
+      width: 600px;
+    }
+
+    .project-left img {
+      width: 700px;
+    }
+
     body {
       margin-top: 0;
+      font-size: 40px;
     }
 }

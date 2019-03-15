@@ -219,8 +219,12 @@ body {
       margin-top: 3em;
     }
 
+    .page-header {
+      font-size: 30px;
+    }
+
     .page-subheader {
-      font-size: 40px;
+      font-size: 30px;
     }
 
     .page-header img {

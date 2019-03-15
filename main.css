@@ -86,30 +86,30 @@ body {
 .project-grid {
   column-count: 2;
   column-gap: 1em;
-  column-fill: auto;
+  column-fill: balance;
   padding: 1em;
 }
 
 .project {
     background: rgb(35, 35, 80);
     background: rgba(35, 35, 80, 0.5);
-    
+
     font-family: "Rokkitt";
-    
+
     padding: 1em;
     padding-bottom: 1.5em;
     margin-bottom: 1.3em;
-    
+
     display: block;
-    
+
     word-wrap: break-word;
-    
+
     transition: background 1s ease;
-    
+
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
-    
+
     overflow: auto;
 }
 
@@ -179,13 +179,13 @@ body {
     .navbar-item {
         float: none;
     }
-    
+
     body {
         margin-top: 18em;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 700px), (orientation: portrait) {
     .project-grid {
         column-count: 1;
     }

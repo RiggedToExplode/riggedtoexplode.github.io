@@ -183,13 +183,33 @@ body {
         float: none;
     }
 
+    .navbar {
+      position: static;
+    }
+
+    .page-header {
+      margin-top: 3em;
+    }
+
     body {
-        margin-top: 18em;
+        margin-top: 3em;
     }
 }
 
 @media only screen and (max-width: 700px), (orientation: portrait) {
     .project-grid {
         column-count: 1;
+    }
+
+    .navbar-item {
+        float: none;
+    }
+
+    .navbar {
+      position: static;
+    }
+
+    .page-header {
+      margin-top: 3em;
     }
 }

@@ -1,6 +1,6 @@
-/*===========*\
-|  CHARACTER  |
-\*===========*/
+/*========*\
+|  PLAYER  |
+\*========*/
 
 /* description pending */
 
@@ -10,7 +10,7 @@ class Character extends Ship {
       super(pos, degrees, {left: -10, top: -15, right: 10, bottom: 15});
     }
     catch (e) {
-      throw new Error("Player failed to construct due to failure in parent: " + e.message);
+      throw new Error("Character failed to construct due to failure in parent: " + e.message);
     }
   }
   

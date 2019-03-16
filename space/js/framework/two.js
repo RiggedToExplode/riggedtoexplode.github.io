@@ -18,7 +18,7 @@ window.onkeydown = function(e) {
 
 /*============*\
 |  GAMEOBJECT  |
-\*===========*/
+\*============*/
 
 /* The very basic constructor that every single object is going to inherit from.
   Ships, planets, blocks, bullets. Anything that is created is going to inherit

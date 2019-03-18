@@ -72,7 +72,7 @@ for (let temp = rand(1, 12); temp > 0; temp--) {
 }
 
 
-    
+
 //Create the player from the Character class, providing a (temporary) position and a degree of rotation
 var Player = new Character([0, 0], 0);
 //Set the player position at a random position around the star
@@ -88,6 +88,27 @@ temp = rand(0, 360);
 temp2 = rand(100, 400);
 NPC.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp * Math.PI / 180);
 NPC.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp * Math.PI / 180);
+NPC.update = function(dt) {
+  temp = [Player.pos[0] - this.pos[0], Player.pos[1] - this.pos[1]];
+
+  temp2 = (Math.atan(temp[1]/temp[0]) / Math.PI * 180) - 90;
+
+  if (temp[0] < 0) {
+    this.degrees = temp2;
+  } else {
+    this.degrees = temp2 + 180;
+  }
+
+  if (Math.sqrt(Math.pow(temp[0], 2) + Math.pow(temp[1], 2)) > 100) {
+    this.velocity = [0.1 * dt * Math.sin(this.degrees * Math.PI / 180), 0.01 * -dt * Math.cos(this.degrees * Math.PI / 180)];
+    //console.log(Math.sqrt(temp[0]^2 + temp[1]^2));
+  } else {
+    this.velocity = [0, 0];
+  }
+
+  this.pos[0] += this.velocity[0];
+  this.pos[1] += this.velocity[1];
+}
 System.addObject(NPC);
 
 

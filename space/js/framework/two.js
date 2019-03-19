@@ -6,6 +6,14 @@ function rand(lo, hi) { //Random integer function.
   return Math.floor(Math.random() * hi) + lo;
 }
 
+function toDegrees(radians) {
+  return (radians / Math.PI) * 180;
+}
+
+function toRadians(degrees) {
+  return (degrees / 180) * Math.PI;
+}
+
 var keystates = {}; //Initialize a keystates object to hold the codes and states of any keys pressed.
 window.onkeyup = function(e) {
   keystates[e.keyCode] = false; //Set a key's state to false when it is let go.
@@ -26,13 +34,13 @@ window.onkeydown = function(e) {
   basic class to test the framework and make sure it is working. */
 
 class GameObject {
-  constructor(pos = [10, 10], degrees = 0, hitbox = { left: -5, top: -5, right: 5, bottom: 5 }) {
+  constructor(pos = [10, 10], radians = 0, hitbox = { left: -5, top: -5, right: 5, bottom: 5 }) {
     this.type = "gameobject";
     this.category = "gameobject";
 
     try {
       this.pos = pos;
-      this.degrees = degrees;
+      this.radians = radians;
       this.hitbox = hitbox;
     } catch (e) {
       throw new Error("GameObject failed to construct due to: " + e.message);
@@ -58,18 +66,32 @@ class GameObject {
     return this._pos;
   }
 
+  set radians(radians) {
+    let temp;
+
+    if ((temp = typeof radians) !== "number") { //Make sure that radians is a number.
+      throw new Error("GameObject expected number for radians, but got " + temp + "!");
+    }
+
+    this._radians = radians; //Set the value; it is safe.
+  }
+
+  get radians() {
+    return this._radians;
+  }
+
   set degrees(degrees) {
     let temp;
 
-    if ((temp = typeof degrees) !== "number") { //Make sure that degrees is a number.
+    if ((temp = typeof degrees) !== "number") {
       throw new Error("GameObject expected number for degrees, but got " + temp + "!");
+    } else {
+      this._radians = (degrees / 180) * Math.PI;
     }
-
-    this._degrees = degrees; //Set the value; it is safe.
   }
 
   get degrees() {
-    return this._degrees;
+    return (this._radians / Math.PI) * 180;
   }
 
   set hitbox(newHitbox) {
@@ -133,7 +155,7 @@ class GameObject {
 
     ctx.save(); //Save the context since we are going to translate and rotate it.
     ctx.translate(rel[0], rel[1]);
-    ctx.rotate(this.degrees * Math.PI / 180);
+    ctx.rotate(this.radians);
     ctx.beginPath();
     ctx.rect(this.hitBox.left, this.hitBox.top, this.hitBox.width, this.hitBox.height); //We should be at [0, 0] so just define the rectangle by the hitbox values.
     ctx.fill();

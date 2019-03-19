@@ -5,19 +5,19 @@
 /* description pending */
 
 class Character extends Ship {
-  constructor(pos, degrees) {
+  constructor(pos, radians) {
     try {
-      super(pos, degrees, {left: -10, top: -15, right: 10, bottom: 15});
+      super(pos, radians, {left: -10, top: -15, right: 10, bottom: 15});
     }
     catch (e) {
       throw new Error("Character failed to construct due to failure in parent: " + e.message);
     }
   }
-  
+
   update(dt) {
     let force = [0, 0], pol = 1, temp;
 
-    if (keystates["32"]) {
+    if (keystates["32"]) { //Slow down faster if space is held down
       this.angularDecay = 0.00008;
       this.velocityDecay = 0.0004;
     } else {
@@ -25,16 +25,16 @@ class Character extends Ship {
       this.velocityDecay = 0.00005;
     }
 
-    if (this.angularVelocity < 0) {
+    if (this.angularVelocity < 0) { //Remember that we were rotating clockwise
       pol = -1;
     }
 
     temp = Math.abs(this.angularVelocity) - this.angularDecay * dt;
 
-    if (temp < 0) {
+    if (temp < 0) { //Don't let the velocity decay turn the velocity negative
       temp = 0;
     }
-    if (temp > this.angularCap) {
+    if (temp > this.angularCap) { //Don't let the velocity go higher than the cap
       this.angularVelocit = this.angularCap;
     }
 
@@ -62,7 +62,7 @@ class Character extends Ship {
       }
     }
 
-    this.degrees += this.angularVelocity * dt;
+    this.radians += this.angularVelocity * dt;
 
     pol = 1;
     if (this.velocity[0] < 0) {
@@ -101,10 +101,10 @@ class Character extends Ship {
 
 
     if (keystates["38"]) {
-      force = [this.speed * dt * Math.sin(this.degrees * Math.PI / 180), -this.speed * dt * Math.cos(this.degrees * Math.PI / 180)];
+      force = [this.speed * dt * Math.sin(this.radians), -this.speed * dt * Math.cos(this.radians)];
     }
     if (keystates["40"]) {
-      force = [-this.speed * dt * Math.sin(this.degrees * Math.PI / 180), this.speed * dt * Math.cos(this.degrees * Math.PI / 180)];
+      force = [-this.speed * dt * Math.sin(this.radians), this.speed * dt * Math.cos(this.radians)];
     }
 
     this.velocity = [this.velocity[0] + force[0], this.velocity[1] + force[1]];

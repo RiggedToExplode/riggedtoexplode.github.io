@@ -7,9 +7,9 @@
 
 
 class Celestial extends GameObject {
-  constructor(orbiting, dist, degrees, speed, size, mass, color) {
+  constructor(orbiting, dist, radians, speed, size, mass, color) {
     try { //try to get the inherited properties from GameObject
-      super([0, 0], degrees, { left: -size, top: -size, right: size, bottom: size });
+      super([0, 0], radians, { left: -size, top: -size, right: size, bottom: size });
     } catch (e) { //throw GameObject's error if one was caught. this will result in a neat little chain down the line
       throw new Error("Celestial failed to construct due to failure in parent: " + e.message);
     }
@@ -198,15 +198,15 @@ class Celestial extends GameObject {
 
   update(dt) {
     if (this.speed) {
-      this.degrees += this.speed * this.dist * dt;
-      if (this.degrees > 360) {
-        this.degrees -= 360;
+      this.radians += this.speed * this.dist * dt;
+      if (this.radians > Math.PI * 2) {
+        this.radians -= Math.PI;
       }
     }
 
     if (this.orbiting !== this) {
-      this.pos[0] = this.orbiting.pos[0] + this.dist * Math.cos(this.degrees * Math.PI / 180);
-      this.pos[1] = this.orbiting.pos[1] + this.dist * Math.sin(this.degrees * Math.PI / 180);
+      this.pos[0] = this.orbiting.pos[0] + this.dist * Math.cos(this.radians);
+      this.pos[1] = this.orbiting.pos[1] + this.dist * Math.sin(this.radians);
     }
   }
 

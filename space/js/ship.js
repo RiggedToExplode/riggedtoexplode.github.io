@@ -5,9 +5,9 @@
 /* description pending */
 
 class Ship extends GameObject {
-  constructor(pos, degrees, hitbox) {
+  constructor(pos, radians, hitbox) {
     try {
-      super(pos, degrees, ((hitbox === undefined) ? {left: -10, top: -15, right: 10, bottom: 15} : hitbox));
+      super(pos, radians, ((hitbox === undefined) ? {left: -10, top: -15, right: 10, bottom: 15} : hitbox));
     } catch (e) {
       throw new Error("Ship failed to construct due to failure in parent: " + e.message);
     }
@@ -18,9 +18,9 @@ class Ship extends GameObject {
     this.speed = 0.00025;
 
     this.angularVelocity = 0;
-    this.angularDecay = 0.00001;
+    this.angularDecay = 0.00000000025;
     this.angularCap = 0.5;
-    this.angularSpeed = 0.0005;
+    this.angularSpeed = 0.000025;
   }
 
   set velocity(velocity) {
@@ -52,7 +52,7 @@ class Ship extends GameObject {
     ctx.strokeStyle = "black"
     ctx.save();
     ctx.translate(rel[0], rel[1]);
-    ctx.rotate(this.degrees * Math.PI / 180);
+    ctx.rotate(this.radians);
     ctx.beginPath();
     ctx.moveTo(size / 2, size * 0.75);
     ctx.lineTo(0, size / 2);

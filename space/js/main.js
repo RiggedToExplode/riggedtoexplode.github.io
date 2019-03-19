@@ -56,16 +56,16 @@ System.addObject(new Star(squish("star", rand(173877, 2782040)), 25000, "yellow"
 let prev = System.objects[0];
 
 for (let temp = rand(1, 12); temp > 0; temp--) {
-  let index = System.objects[0].addSatellite(new Planet(System.objects[0], squish("dist", rand(5800000, 588000000)) + prev.size + prev.dist, rand(0, 360), rand(100, 2000), squish("planet", rand(2400, 7000)), 5000, colors[rand(0, colors.length - 1)]));
-  System.addObject(System.objects[0].satellites[index]);
+  let index = System.objects[0].addSatellite(new Planet(System.objects[0], squish("dist", rand(5800000, 588000000)) + prev.size + prev.dist, toRadians(rand(0, 360)), toRadians(rand(100, 2000)), squish("planet", rand(2400, 7000)), 5000, colors[rand(0, colors.length - 1)]));
+  System.addObject(System.objects[0].satellites[index]); //Create a planet orbiting the star
 
-  let prev2 = System.objects[0].satellites[index];
-  let prevdist = 0;
+  let prev2 = System.objects[0].satellites[index]; //Start by considering this planet as the "previous" moon
+  let prevdist = 0; //The previous distance should be 0, since we're starting at the planet itself.
   for (let temp2 = rand(1, 4); temp2 > 0; temp2--) {
-    let index2 = System.objects[0].satellites[index].addSatellite(new Planet(System.objects[0].satellites[index], squish("dist", rand(1500000, 4000000)) + prev2.size + prevdist, rand(0, 360), rand(1000, 20000), squish("planet", rand(300, 1000)), 500, colors[rand(0, colors.length - 1)]));
-    System.addObject(System.objects[0].satellites[index].satellites[index2]);
-    prev2 = System.objects[0].satellites[index].satellites[index2];
-    prevdist = System.objects[0].satellites[index].satellites[index2].dist;
+    let index2 = System.objects[0].satellites[index].addSatellite(new Planet(System.objects[0].satellites[index], squish("dist", rand(1500000, 4000000)) + prev2.size + prevdist, toRadians(rand(0, 360)), toRadians(rand(1000, 20000)), squish("planet", rand(300, 1000)), 500, colors[rand(0, colors.length - 1)]));
+    System.addObject(System.objects[0].satellites[index].satellites[index2]); //Create the moon and add it
+    prev2 = System.objects[0].satellites[index].satellites[index2]; //Set the moon as the previous moon
+    prevdist = System.objects[0].satellites[index].satellites[index2].dist; //Set this moon's distance as the previous distance.
   }
 
   prev = System.objects[0].satellites[index];
@@ -76,15 +76,15 @@ for (let temp = rand(1, 12); temp > 0; temp--) {
 //Create the player from the Character class, providing a (temporary) position and a degree of rotation
 var Player = new Character([0, 0], 0);
 //Set the player position at a random position around the star
-let temp = rand(0, 360);
+let temp = toRadians(rand(0, 360));
 let temp2 = rand(100, 400);
-Player.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp * Math.PI / 180);
-Player.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp * Math.PI / 180);
+Player.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp);
+Player.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp);
 System.addObject(Player);
 
 //Add another random ship for testing purposes.
-var NPC = new Ship([0, 0], rand(0, 360));
-temp = rand(0, 360);
+var NPC = new Ship([0, 0], toRadians(rand(0, 360)));
+temp = toRadians(rand(0, 360));
 temp2 = rand(100, 400);
 NPC.pos[0] = System.objects[0].pos[0] + (temp2 + System.objects[0].size) * Math.cos(temp * Math.PI / 180);
 NPC.pos[1] = System.objects[0].pos[1] + (temp2 + System.objects[0].size) * Math.sin(temp * Math.PI / 180);

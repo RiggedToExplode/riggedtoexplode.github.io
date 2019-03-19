@@ -229,6 +229,7 @@ body {
 
     .page-header img {
       width: 600px;
+      border-radius: 20px;
     }
 
     .project-left img {

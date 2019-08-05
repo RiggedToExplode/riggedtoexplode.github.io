@@ -153,6 +153,15 @@ body {
     margin-top: 0;
 }
 
+.project-desc a {
+    color: #71879E;
+    text-decoration: underline;
+}
+
+.project-desc a:hover {
+    color: #536477;
+}
+
 .project-changes-header {
     text-align: center;
     margin-bottom: 0.5em;

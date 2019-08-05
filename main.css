@@ -179,6 +179,12 @@ body {
     }
 }
 
+@media only screen and (max-width: 1185px) {
+    .page-header {
+        margin-top: 8em;
+    }
+}
+
 @media only screen and (max-width: 800px) {
     .navbar-item {
         float: none;
@@ -234,7 +240,7 @@ body {
     }
 
     .project-left img {
-      width: 700px;
+      width: 98%;
     }
 
     body {

@@ -213,6 +213,7 @@ body {
 
     .navbar {
       position: static;
+      display: none;
     }
 
     .page-header {

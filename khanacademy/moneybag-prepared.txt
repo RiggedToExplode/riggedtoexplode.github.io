@@ -1,0 +1,107 @@
+//I reached a highscore of 38,try to get above that.
+var coinX =random (1,400);
+var coinY =1;//Variables
+var healthX=random(1,400);
+var HealthY=1;
+var Hspeed=1;
+var Health=0;
+var score=0;
+var Ghost=0;
+var Modify=1;//Coins don't move,which makes it so the GAME OVER screen will not block your view.
+var speed=3;
+var Cursor=1;
+var highscore=0;
+var GameRunning = 1;
+var Health=0;
+var Freeze=1;//Is part of modify
+var Pause=0;
+var easy=1;
+var Normal=0;
+var hard=0;
+if(normal){
+    var Lives=10;
+}
+if(easy){
+    var Lives=15;
+}
+else{
+    var Lives=5;
+}
+var draw = function() {//Loop
+
+    background(9, 0, 255);//Background
+    if(Cursor){
+        fill(29, 117, 117);
+    ellipse(mouseX,mouseY,12,12);
+    }
+    if(Modify){
+        coinY=Freeze;
+        text("Paused (Modify on)",102,189);
+    }
+    if(score<0){
+        score=0;
+    }
+    var f = createFont("monospace", 20);
+    fill(255, 255, 0);
+    textFont(f, 20);//Text
+    text("Click to buy a life.",98,387);
+    text("Score: ",10,15);
+    text(score,80,15);
+    text("Highscore:",10,30);
+    text(highscore,125,30);//Text End
+    text("Lives:",1,387);
+    text(Lives,68,387);
+    text("Speed:",9,44);
+    text(speed,79,46);
+    fill(52, 79, 21);//The moneybag and coin
+    noStroke();
+    ellipse(mouseX,350,50,30);
+    triangle(mouseX,350,mouseX-25,300,mouseX+25,300);
+    fill(255, 242, 0);
+    stroke(1,1,1);
+    ellipse(coinX,coinY,12,12);
+    coinY = coinY+speed;
+   // HealthY=HealthY+Hspeed;
+    text("$",mouseX-5,355);
+    if(score>highscore){//Highscore gears
+    highscore=score;
+    }//Dropouts
+    if(coinY>400){
+    coinX =random (1,400);
+     coinY =1;
+     score=score-1;
+     speed=speed-1/4;
+     Lives=Lives-1;
+    }
+    if(coinY>300) {//catching
+    if(coinX>mouseX-25){
+     if (coinX<mouseX+25){
+           coinX =random (1,400);
+    coinY =1;
+     score=score+1;
+     if(Health){
+         Lives=Lives+1;
+     }
+    if(speed<30){
+    speed=speed+1/2;
+    }}}
+}//end Game
+ if(Lives<1)  {
+        background(10, 6, 6);
+       
+        fill(255, 0, 0);
+        text("GAME OVER",150,180);
+        text("Highscore:",150,200);
+        text(highscore,268,200);
+        coinY=Freeze;
+        GameRunning=0;
+        text("Score:",149,216);
+        text(score,220,217);
+    }
+    
+    if(score>10){
+        if(mouseIsPressed){
+            if(GameRunning){
+                Lives=Lives+1;
+            score=score-10;}}}
+};

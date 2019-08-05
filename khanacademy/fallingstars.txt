@@ -1,0 +1,305 @@
+/*
+Falling Stars is a revision of my old game, Money Bag, which was one of the first programs I made. Money Bag was all made out of ellipse(); and commands like that. When I became a little better at programming, and saw how easy it was to use images, I decided to remake my old Money Bag. Money Bag was updated through spin-offs, which will be deleted, whereas the final Money Bag will stay up and be renamed Money Bag Classic.
+
+How to Play:
+Move the mouse to move the dinasaur to catch stars. Hearts give you health, and, oh yeah, don't forget to press play!
+BUGS:
+Stable Version
+Goals:
+If you die on hard difficulty, an option appears on the game over screen called Armageddon. Picking this causes the stars and sky to go red, the grass turn grey, you have one life, and the stars fall extremely fast.
+*/
+//Variable Definition
+var gameInPlay=0;
+var diffe=0;
+var diffn=1;
+var diffh=0;
+var resseted=0;
+var options=0;
+var star = getImage("cute/Star");
+var backdrop = getImage("space/background");
+var heart = getImage("cute/Heart" );
+var coin = getImage("cute/Star");
+var starY=5;
+var lifeY=5;
+var player = getImage("avatars/piceratops-ultimate");
+var grass = getImage("cute/GrassBlock");
+var boom = getImage("cute/Selector");
+var rock = getImage("cute/Rock");
+var water = getImage("cute/WaterBlock");
+var bush = getImage("cute/TreeShort");
+var tree = getImage("cute/TreeTall");
+var planet = getImage("space/planet");
+var shadow = getImage("cute/ShadowSouth");
+var lives = 3;
+var score = 0;
+var starX = random(5,395);
+var speedPoints=0;
+var level=0;
+var pause=0;
+var generalSpeed = 2.3;
+var boomSize=0;
+var menuSpeed=7;
+var menuX=random(10,324);
+var menuY=5;
+var heartChance=random(1,10);
+var f=createFont("fantasy");
+textFont(f);
+textSize(58);
+var draw = function() {
+    image(backdrop,-85,-5);
+    //Game Menu Function
+    if(gameInPlay===0){
+        fill(171, 215, 219);
+                image(star,menuX,menuY,50,74);
+        rect(100,110,200,143,3);
+        rect(100,100,200,13,4);
+        fill(77, 255, 0);
+        //highliting the play button on mouse hover-over
+        if(mouseX>120 && mouseX<280 && mouseY>162 && mouseY<212 && options===0){
+            fill(36, 92, 36);
+        }
+        rect(120,162,160,50,5);
+        fill(0, 255, 247);
+        //highliting options button
+        if(mouseX>120 && mouseX<280 && mouseY>218 && mouseY<247 && options===0){
+            fill(0, 4, 255);
+            if(mouseIsPressed){
+                options=1;
+            }
+        
+        }
+        //drawing everything
+        rect(120,218,160,29,5);
+        textSize(16);
+        fill(0,0,0);
+        text("Options",169,237);
+        textSize(27);
+        fill(52, 67, 201);
+        text("Falling Stars",129,145);
+        fill(0, 0, 0);
+        text("Play",169,196);
+        //options screen
+        if(options){
+            fill(171, 215, 219);
+            rect(121,158,159,84,3);
+            rect(121,156,159,10,3);
+            fill(0,0,0);
+            textSize(23);
+            text("Options",149,184);
+            textSize(15);
+            text("Difficulty",158,202);
+            fill(0,0,0);
+            //pushing Easy
+            if(mouseX>141 && mouseX<156 && mouseY>214 && mouseY<229){
+                fill(72, 255, 0);
+                if(mouseIsPressed){
+                    lives=5;
+                    generalSpeed=1.3;
+                    diffe=1;
+                    diffn=0;
+                    diffh=0;
+                }
+            }
+            if(diffe){
+                fill(72, 255, 0);
+            }
+            rect(141,214,15,15);
+            fill(0, 0, 0);
+            //pushing normal
+            if(mouseX>190 && mouseX<205 && mouseY>214 && mouseY<229){
+                fill(255, 217, 0);
+                if(mouseIsPressed){
+                    lives=3;
+                    generalSpeed=2.3;
+                    diffe=0;
+                    diffn=1;
+                    diffh=0;
+                }
+            }
+            if(diffn){
+                fill(255, 217, 0);
+            }
+            rect(190,214,15,15);
+            fill(0,0,0);
+            //pushing hard
+            if(mouseX>238 && mouseX<253 && mouseY>214 && mouseY<229){
+                fill(255, 0, 0);
+                if(mouseIsPressed){
+                    lives=1;
+                    generalSpeed=3.3;
+                    diffe=0;
+                    diffn=0;
+                    diffh=1;
+                }
+            }
+            if(diffh){
+                fill(255, 0, 0);
+            }
+            rect(238,214,15,15);
+            textSize(13);
+            fill(166, 38, 38);
+            //pushing close
+            if(mouseX>123 && mouseX<162 && mouseY>148 && mouseY<162){
+                fill(51, 255, 0);
+                if(mouseIsPressed){
+                    options=0;
+                }
+            }
+            rect(123,148,39,14,3);
+            fill(0, 0, 0);
+            text("Close",127,161);
+            
+        
+            }
+        //pushing Play
+        if(mouseX>120 && mouseX<280 && mouseY>162 && mouseY<212 && mouseIsPressed && options===0){
+            gameInPlay=1;
+
+        }
+        fill(255, 0, 0);
+        ellipse(109,107,10,10);
+        fill(255, 230, 0);
+        ellipse(124,107,10,10);
+        fill(58, 207, 16);
+        ellipse(140,107,10,10);
+        //moving the stars on the menu
+            menuY= menuY + menuSpeed;
+            if(menuY>400){
+                menuX=random(5,395);
+                menuY=5;
+    
+            }
+        }
+    if(gameInPlay){
+        //making most of the scenery
+    image(grass,50,350,50,70);
+    image(grass,0,350,50,70);
+    image(grass,100,350,50,70);
+    image(grass,150,350,50,70);
+    image(grass,200,350,50,70);
+    image(grass,250,350,50,70);
+    image(grass,300,350,50,70);
+    image(grass,350,350,50,70);
+    image(bush,201,333,50,70);
+    image(bush,45,322,60,80);
+    image(heart,5,-10,50,70);
+    image(coin,5,31,50,70);
+    image(rock,280,275,131,153);
+    image(rock,315,228,125,136);
+    image(rock,355,309,88,101);
+    image(tree,318,270,80,150);
+    image(planet,252,34,100,100);
+    image(planet,28,172,80,80);
+    //rotate(17);
+    //rotate(343);
+    textSize(48);
+        if(resseted){
+            fill(0, 0, 0);
+        }
+    fill(0, 0, 0);
+    text(":",52,35);
+    text(lives,66,47);
+    text(":",49,83);
+    text(score,59,85);
+    //drawing the star
+    if(heartChance<9){
+        image(star,starX,starY,46,61);
+    }
+    //drawing the heart
+    if(heartChance>9){
+    image(heart,starX,starY,46,61);
+    }
+    //moving the heart and star
+    starY = starY + generalSpeed;
+    //missed catch
+    if(starY>400 && lives>0){
+        //resseting everything
+        starX=random(20,375);
+        starY=5;
+        image(boom,mouseX,350,50,70);
+        lives=lives-1;
+        heartChance=random(1,10);
+    }
+    if(lives<1){
+        //game over
+        background(0, 255, 230);
+        //drawing heaven
+        fill(237, 237, 237);
+        noStroke();
+        ellipse(45,401,175,90);
+        ellipse(200,392,156,50);        
+        ellipse(347,383,197,121);
+        image(star,-3,83);
+        image(star,330,24,50,90);
+        image(star,314,213,50,84);
+        fill(67, 107, 112);
+        textSize(50);
+        text("Game Over",91,180);
+        if(diffh===1 && score>10){
+            
+        }
+        fill(25, 188, 194);
+        //clicking/hovering over restart button
+        if(mouseX>151 && mouseX<268 && mouseY>196 && mouseY<227){
+            fill(38, 255, 0);
+            //clicking restart
+            if(mouseIsPressed){
+                //finding difficulty
+                if(diffe){
+                    lives=5;
+                    generalSpeed=1.3;
+                }
+                if(diffn){
+                    lives=3;
+                    generalSpeed=2.3;
+                    
+                }
+                if(diffh){
+                    lives=1;
+                    generalSpeed=3.3;
+                }
+                level=0;
+                resseted=1;
+                starY=5;
+            }
+        }
+        rect(151,196,117,31,5);
+        fill(67, 107, 112);
+
+        textSize(26);
+        text("Restart?",160,217);
+    }
+    //drawing player
+    image(player,mouseX-40,320,80,80);
+    if(starX>mouseX-40 && starX<mouseX+40 && starY>300 && lives>0){
+        //catching the star
+        score=+1;
+        starX=random(20,375);
+        starY=5;
+        speedPoints+=1;
+        if(heartChance>9){
+            //if a heart appeared
+            lives+=1;
+        }
+        heartChance=random(1,10);
+    if(speedPoints===3){
+        speedPoints=0;
+        generalSpeed+=1.3;
+        level+=1;
+        
+    }
+
+    if(level>5){
+        generalSpeed=14;
+    }
+
+    }
+    if(pause){
+        generalSpeed=0;
+    }
+    if(lives<0){
+        lives=0;
+    }    
+    }
+
+};

@@ -1,0 +1,25 @@
+background(145, 173, 54);
+stroke(0, 0, 0);
+fill(240, 231, 231);
+rect(145,99,142,202);
+
+var f = createFont("fantasy", 20);
+textFont(f, 20);
+var draw= function() {
+    var x = random(mouseX+50, mouseX-50);
+var y = random(mouseY+50, mouseY-50);
+var z = random (1, 400);
+
+var a = random(1,255);
+var b = random(1,255);
+var c = random(1,255);var a = random(1,255);
+var d = random(1,255);
+
+var e = random(1,255);
+var f = random(1,255);
+stroke(d,e,f);
+    if (mouseIsPressed) {
+        fill(a,b,c);
+        ellipse(x,y,15,15);
+    }
+};

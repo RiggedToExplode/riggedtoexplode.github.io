@@ -112,7 +112,8 @@ var $P = {
     }, interval);
   }
 }
-WebAssembly.instantiateStreaming(fetch("https://riggedtoexplode.github.io/test.wasm")).then(obj => {
-  console.log("wasm loading done");
-  $P.wasm = obj;
-});
+fetch("test.wasm")
+    .then(response => response.arrayBuffer())
+    .then(buffer => WebAssembly.compile(buffer))
+    .then(module => {return new WebAssembly.Instance(module)})
+    .then($P.wasm = instance);

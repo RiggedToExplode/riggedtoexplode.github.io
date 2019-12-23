@@ -116,4 +116,4 @@ fetch("test.wasm")
     .then(response => response.arrayBuffer())
     .then(buffer => WebAssembly.compile(buffer))
     .then(module => {return new WebAssembly.Instance(module)})
-    .then($P.wasm = instance);
+    .then(instance => {$P.wasm = instance});

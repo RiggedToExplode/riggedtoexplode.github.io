@@ -1,6 +1,9 @@
 [submodule "space.js"]
 	path = space.js
-	url = https://github.com/RiggedToExplode/space.js.git
+	url = https://github.com/ThomasZent/space.js.git
 [submodule "wynd.js"]
 	path = wynd.js
-	url = https://github.com/RiggedToExplode/wynd.js.git
+	url = https://github.com/ThomasZent/wynd.js.git
+[submodule "BangleApps"]
+	path = BangleApps
+	url = https://github.com/ThomasZent/BangleApps.git
